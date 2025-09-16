@@ -1,0 +1,44 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+env/
+venv/
+portafolio/
+*.env
+
+# Conda environment files
+*.conda
+*.ipynb_checkpoints
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Audio files generated (no subir MP3 generados)
+*.mp3
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Images carpeta (opcional, si quieres subirlas solo)
+# images/

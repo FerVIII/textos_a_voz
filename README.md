@@ -6,10 +6,10 @@ Este proyecto convierte texto en audio en formato MP3 usando Python. Permite obt
 
 ## Características
 
-- Convertir artículos desde URL usando `newspaper3k`.
+- Convertir artículos desde URL usando newspaper3k.
 - Convertir texto desde un archivo local.
 - Escribir texto manualmente en la consola.
-- Guardar el audio generado con **nombre y ruta personalizables**.
+- Guardar el audio generado con nombre y ruta personalizables.
 - Reproducción automática del audio según el sistema operativo (Windows, macOS, Linux/WSL).
 - Manejo robusto de errores: texto vacío, fallos al descargar artículos o leer archivos.
 
@@ -19,63 +19,62 @@ Este proyecto convierte texto en audio en formato MP3 usando Python. Permite obt
 
 - Python 3.8 o superior
 - Bibliotecas Python:
+  pip install nltk newspaper3k gTTS
 
-````bash
-
-pip install nltk newspaper3k gTTS
 Para Linux, opcional: instalar xdg-utils si no está presente para abrir archivos con xdg-open.
 
+---
 
-```markdown
 ## Captura previa
 
-![Interfaz del proyecto](images/imagen_1.png)
+![Interfaz principal](images/imagen_1.png)
 
-![Editor de audio](images/imagen_2.png)
+![Editor de texto](images/imagen_2.png)
 
 ![Generando audio](images/imagen_3.png)
 
 ---
-## Estructura recomendada del proyecto
-texto_a_voz/
-├── texto_a_voz.py       # Script principal
-├── README.md
-└── audios/              # Carpeta opcional para guardar tus MP3
 
+## Estructura recomendada del proyecto
+
+texto_a_voz/
+├── texto_a_voz.py # Script principal
+├── README.md
+└── audios/ # Carpeta opcional para guardar tus MP3
 
 Nota: La carpeta audios/ se puede crear para organizar tus archivos de salida.
+
+---
 
 ## Uso
 
 1. Ejecuta el script:
-
-python texto_a_voz.py
-
+   python texto_a_voz.py
 
 2. Selecciona una opción para obtener el texto:
 
-1: Convertir artículo desde URL.
-
-2: Escribir texto manualmente.
-
-3: Usar texto desde archivo local.
+- 1: Convertir artículo desde URL
+- 2: Escribir texto manualmente
+- 3: Usar texto desde archivo local
 
 3. Introduce el nombre o ruta del archivo de audio donde quieres guardarlo:
-
-mi_audio.mp3
-./audios/mi_audio.mp3
-
+   mi_audio.mp3
+   ./audios/mi_audio.mp3
 
 4. Si no agregas .mp3 al final, se añadirá automáticamente.
 
 El script generará el archivo de audio y lo reproducirá automáticamente según tu sistema operativo.
 
+---
+
 ## Ejemplo de ejecución
+
 Opciones:
+
 1. Convertir artículo desde URL
 2. Escribir texto manualmente
 3. Usar texto desde archivo local
-Selecciona una opción (1/2/3): 2
+   Selecciona una opción (1/2/3): 2
 
 Escribe el texto (finaliza con una línea vacía):
 Hola, este es un ejemplo.
@@ -85,15 +84,16 @@ Introduce el nombre o ruta del archivo de audio (ej: mi_audio.mp3 o ./audios/mi_
 ./audios/ejemplo.mp3
 Audio generado en: ./audios/ejemplo.mp3
 
-Notas
+---
 
-En Linux pueden aparecer advertencias sobre VDPAU o PipeWire. No afectan la reproducción del audio.
+## Notas
 
-Compatible con Windows, macOS y Linux/WSL.
+- En Linux pueden aparecer advertencias sobre VDPAU o PipeWire. No afectan la reproducción del audio.
+- Compatible con Windows, macOS y Linux/WSL.
+- Para rutas largas o nombres con espacios, se recomienda usar comillas ("./audios/mi audio.mp3").
 
-Para rutas largas o nombres con espacios, se recomienda usar comillas ("./audios/mi audio.mp3").
+---
 
-Contribuciones
+## Contribuciones
 
 Si quieres mejorar el proyecto (soporte de idiomas, velocidad de voz, etc.), crea un fork y un pull request. Todo aporte es bienvenido.
-````

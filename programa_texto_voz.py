@@ -1,11 +1,5 @@
-# Texto a Voz
-# La idea de este proyecto es convertir un artículo existente en un archivo de audio reproducible
-# en formato mp3. Para ello puedes hacer uso de bibliotecas existentes como nltk, newspaper3k y gtts.
-# Puedes crear un programa al que proporcionarle una URL de un artículo a convertir para
-# luego manejar la conversión de texto a voz.
-
+# Texto a Voz Avanzado
 import nltk
-
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
@@ -14,15 +8,38 @@ except LookupError:
 from newspaper import Article
 from gtts import gTTS
 import os
+import platform
+import subprocess
 
-def convertir_texto_a_voz(texto):
+def reproducir_audio(ruta):
+    if not os.path.exists(ruta):
+        print(f"El archivo {ruta} no existe.")
+        return
+    
+    sistema = platform.system()
+    try:
+        if sistema == "Windows":
+            os.startfile(ruta)
+        elif sistema == "Darwin":  # macOS
+            subprocess.run(["open", ruta])
+        else:  # Linux / WSL
+            subprocess.run(["xdg-open", ruta])
+    except Exception as e:
+        print(f"No se pudo reproducir automáticamente: {e}")
+
+def convertir_texto_a_voz(texto, ruta_archivo):
     if not texto.strip():
         print("No se proporcionó texto para convertir.")
-        return
-    tts = gTTS(text=texto, lang='es')
-    archivo_audio = 'articulo.mp3'
-    tts.save(archivo_audio)
-    print(f"El texto ha sido convertido a audio y guardado como {archivo_audio}")
+        return False
+
+    try:
+        tts = gTTS(text=texto, lang='es')
+        tts.save(ruta_archivo)
+        print(f"Audio generado en: {ruta_archivo}")
+        return True
+    except Exception as e:
+        print(f"Error al generar el audio: {e}")
+        return False
 
 def obtener_texto_desde_url(url):
     try:
@@ -42,51 +59,40 @@ def obtener_texto_desde_archivo(ruta):
         print(f"Error al leer el archivo: {e}")
         return ""
 
-if __name__ == "__main__":
+def pedir_texto():
     print("Opciones:")
     print("1. Convertir artículo desde URL")
     print("2. Escribir texto manualmente")
     print("3. Usar texto desde archivo local")
     opcion = input("Selecciona una opción (1/2/3): ").strip()
 
-    texto = ""
     if opcion == "1":
         url = input("Introduce la URL del artículo: ")
-        texto = obtener_texto_desde_url(url)
+        return obtener_texto_desde_url(url)
     elif opcion == "2":
+        print("Escribe el texto (finaliza con una línea vacía):")
+        lineas = []
         while True:
-            print("Escribe el texto (finaliza con una línea vacía):")
-            lineas = []
-            while True:
-                linea = input()
-                if linea == "":
-                    break
-                lineas.append(linea)
-            texto = "\n".join(lineas)
-
-            if texto.strip():
-                convertir_texto_a_voz(texto)
-                reproducir = input("¿Quieres reproducir el audio? (s/n): ").strip().lower()
-                if reproducir == "s":
-                    os.system(f"start {os.path.abspath('articulo.mp3')}")
-            else:
-                print("No se proporcionó texto para convertir.")
-
-            continuar = input("¿Quieres escribir otro texto? (s/n): ").strip().lower()
-            if continuar != "s":
+            linea = input()
+            if linea == "":
                 break
+            lineas.append(linea)
+        return "\n".join(lineas)
     elif opcion == "3":
         ruta = input("Introduce la ruta del archivo de texto: ")
-        texto = obtener_texto_desde_archivo(ruta)
+        return obtener_texto_desde_archivo(ruta)
     else:
         print("Opción no válida.")
-        exit()
+        return ""
 
+if __name__ == "__main__":
+    texto = pedir_texto()
     if texto.strip():
-        convertir_texto_a_voz(texto)
-        reproducir = input("¿Quieres reproducir el audio? (s/n): ").strip().lower()
-        if reproducir == "s":
-            os.system(f"start {os.path.abspath('articulo.mp3')}")
+        ruta = input("Introduce el nombre o ruta del archivo de audio (ej: mi_audio.mp3 o ./audios/mi_audio.mp3): ").strip()
+        if not ruta.endswith(".mp3"):
+            ruta += ".mp3"
+        
+        if convertir_texto_a_voz(texto, ruta):
+            reproducir_audio(ruta)
     else:
         print("No se pudo obtener texto para convertir.")
-

@@ -1,12 +1,28 @@
-# Texto a Voz 🗣️🎵
+# Texto a Voz Avanzado
 
-## Descripción
-
-Este proyecto permite convertir un artículo, texto manual o archivo de texto en un archivo de audio reproducible en formato MP3. Utiliza librerías como `nltk`, `newspaper3k` y `gtts` para obtener, procesar y convertir texto a voz en español.
-
-El objetivo es transformar artículos web o texto propio en audio para escuchar de manera sencilla.
+Este proyecto convierte texto en audio en formato MP3 usando Python. Permite obtener texto de un artículo web, un archivo local o introducirlo manualmente en la consola, generando un archivo de audio reproducible en tu sistema operativo.
 
 ---
+
+## Características
+
+- Convertir artículos desde URL usando `newspaper3k`.
+- Convertir texto desde un archivo local.
+- Escribir texto manualmente en la consola.
+- Guardar el audio generado con **nombre y ruta personalizables**.
+- Reproducción automática del audio según el sistema operativo (Windows, macOS, Linux/WSL).
+- Manejo robusto de errores: texto vacío, fallos al descargar artículos o leer archivos.
+
+---
+
+## Requisitos
+
+- Python 3.8 o superior
+- Bibliotecas Python:
+
+```bash
+pip install nltk newspaper3k gTTS
+Para Linux, opcional: instalar xdg-utils si no está presente para abrir archivos con xdg-open
 
 ## Captura previa
 
@@ -15,59 +31,64 @@ El objetivo es transformar artículos web o texto propio en audio para escuchar 
 ![Interfaz del proyecto](images/imagen_3.png)
 
 ---
+## Estructura recomendada del proyecto
+texto_a_voz/
+├── texto_a_voz.py       # Script principal
+├── README.md
+└── audios/              # Carpeta opcional para guardar tus MP3
 
-## Tecnologías usadas
 
-- Python 3.12
-- [NLTK](https://www.nltk.org/) → procesamiento de texto
-- [newspaper3k](https://newspaper.readthedocs.io/) → extracción de artículos web
-- [gTTS](https://pypi.org/project/gTTS/) → conversión de texto a voz
-- [Tkinter](https://docs.python.org/3/library/tkinter.html) → interfaz gráfica
+Nota: La carpeta audios/ se puede crear para organizar tus archivos de salida.
 
----
+## Uso
 
-## Instalación
+1. Ejecuta el script:
 
-1. **Clonar el repositorio**
+python texto_a_voz.py
 
-```bash
-git clone https://github.com/FerVIII/pasar_texto_a_voz.git
-cd pasar_texto_a_voz
+
+2. Selecciona una opción para obtener el texto:
+
+1: Convertir artículo desde URL.
+
+2: Escribir texto manualmente.
+
+3: Usar texto desde archivo local.
+
+3. Introduce el nombre o ruta del archivo de audio donde quieres guardarlo:
+
+mi_audio.mp3
+./audios/mi_audio.mp3
+
+
+4. Si no agregas .mp3 al final, se añadirá automáticamente.
+
+El script generará el archivo de audio y lo reproducirá automáticamente según tu sistema operativo.
+
+## Ejemplo de ejecución
+Opciones:
+1. Convertir artículo desde URL
+2. Escribir texto manualmente
+3. Usar texto desde archivo local
+Selecciona una opción (1/2/3): 2
+
+Escribe el texto (finaliza con una línea vacía):
+Hola, este es un ejemplo.
+<Enter>
+
+Introduce el nombre o ruta del archivo de audio (ej: mi_audio.mp3 o ./audios/mi_audio.mp3):
+./audios/ejemplo.mp3
+Audio generado en: ./audios/ejemplo.mp3
+
+Notas
+
+En Linux pueden aparecer advertencias sobre VDPAU o PipeWire. No afectan la reproducción del audio.
+
+Compatible con Windows, macOS y Linux/WSL.
+
+Para rutas largas o nombres con espacios, se recomienda usar comillas ("./audios/mi audio.mp3").
+
+Contribuciones
+
+Si quieres mejorar el proyecto (soporte de idiomas, velocidad de voz, etc.), crea un fork y un pull request. Todo aporte es bienvenido.
 ```
-
-2. Usar Conda (recomendado)
-
-conda create -n portafolio python=3.12 -y
-conda activate portafolio
-
-3. Instalar librerías necesarias
-
-pip install nltk newspaper3k gtts lxml[html_clean] Pillow
-
-4. Descargar recursos de NLTK
-
-python -c "import nltk; nltk.download('punkt')"
-
-Uso
-
-Al ejecutar el programa, se presentan tres opciones:
-
-Convertir artículo desde URL
-
-Introduce la URL de un artículo web.
-
-El programa descargará el texto y generará un archivo articulo.mp3.
-
-Escribir texto manualmente
-
-Escribe tu texto directamente en la consola (finaliza con línea vacía).
-
-Se genera un archivo articulo.mp3.
-
-Opción de reproducir el audio automáticamente.
-
-Usar texto desde archivo local
-
-Introduce la ruta de un archivo .txt.
-
-Se genera un archivo articulo.mp3.

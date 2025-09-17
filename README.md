@@ -21,13 +21,17 @@ Este proyecto convierte texto en audio en formato MP3 usando Python. Permite obt
 - Bibliotecas Python:
 
 ```bash
+
 pip install nltk newspaper3k gTTS
 Para Linux, opcional: instalar xdg-utils si no está presente para abrir archivos con xdg-open
 
+---
 ## Captura previa
 
 ![Interfaz del proyecto](images/imagen_1.png)
+
 ![Interfaz del proyecto](images/imagen_2.png)
+
 ![Interfaz del proyecto](images/imagen_3.png)
 
 ---

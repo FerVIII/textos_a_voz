@@ -20,19 +20,20 @@ Este proyecto convierte texto en audio en formato MP3 usando Python. Permite obt
 - Python 3.8 o superior
 - Bibliotecas Python:
 
-```bash
+````bash
 
 pip install nltk newspaper3k gTTS
-Para Linux, opcional: instalar xdg-utils si no está presente para abrir archivos con xdg-open
+Para Linux, opcional: instalar xdg-utils si no está presente para abrir archivos con xdg-open.
 
----
+
+```markdown
 ## Captura previa
 
 ![Interfaz del proyecto](images/imagen_1.png)
 
-![Interfaz del proyecto](images/imagen_2.png)
+![Editor de audio](images/imagen_2.png)
 
-![Interfaz del proyecto](images/imagen_3.png)
+![Generando audio](images/imagen_3.png)
 
 ---
 ## Estructura recomendada del proyecto
@@ -95,4 +96,4 @@ Para rutas largas o nombres con espacios, se recomienda usar comillas ("./audios
 Contribuciones
 
 Si quieres mejorar el proyecto (soporte de idiomas, velocidad de voz, etc.), crea un fork y un pull request. Todo aporte es bienvenido.
-```
+````
